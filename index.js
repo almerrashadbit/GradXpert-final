@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const sequelize = require('./src/config/db');
 const movieRoutes = require('./src/routes/movieRoutes');
 const userRoutes = require('./src/routes/userRoutes');
+const bookmarkRoutes = require('./src/routes/bookmarkRoutes')
 
 
 const app = express();
@@ -13,7 +14,7 @@ app.use(bodyParser.json());
 
 app.use('/', userRoutes);
 app.use('/', movieRoutes);
-
+app.use('/', bookmarkRoutes);
 
 sequelize.sync().then(() => {
   app.listen(PORT, () => {

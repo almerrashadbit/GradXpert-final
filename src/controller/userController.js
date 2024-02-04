@@ -1,5 +1,5 @@
 // controllers/MovieController.js
-const Model = require('../model');
+const Model = require('../model/model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -8,7 +8,7 @@ async function registerUser(req, res) {
         const { nama, username, email, password, role, address, phoneNumber } = req.body;
         const hashedPassword = await bcrypt.hash(password, 10);
     
-        const newUser = await Model.User.create({
+        await Model.User.create({
           nama,
           username,
           email,
@@ -18,7 +18,7 @@ async function registerUser(req, res) {
           phoneNumber,
         });
     
-        res.json({ message: 'User registered successfully', user: newUser });
+        res.json({ message: 'User registered successfully'});
       } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
